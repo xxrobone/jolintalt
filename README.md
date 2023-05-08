@@ -3,10 +3,9 @@
 
 ## Node express crud assignment
 
-To run the project clone this repo or fork it, or download zip
-Open the project using vs code or your favorite editor
-
-Open a new terminal
-write npm run dev to start at server on localhost:5500
-
-open a browser to check the movies (get) enter http://localhost:5500/movies
+To run the project:
+1 clone this repo or fork it, or download zip
+2 Open the project using vs code or your favorite editor
+3 Open a terminal and write "npm i" or "npm install" to add the dependencies 
+4 Type command "Npm run server" (opens a port on 5500)
+5 Open a browser to check the movies enter http://localhost:5500/movies
