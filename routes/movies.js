@@ -44,4 +44,38 @@ router.delete('/:id', (req, res) => {
   res.json(`The movie ${title} with the id: ${movieID} successfully removed`);
 });
 
+/* router.post('/', (req, res) => {
+  const movie = req.body.movie;
+    let randomIdNum = Math.floor(Math.random() * 10000000 + 1);
+
+  let nextId = `tt${randomIdNum}`;
+  console.log(nextId);
+
+  const newMovie = {
+    ...movie
+  };
+console.log(newMovie)
+
+}); */
+
+router.post('/', (req, res) => {
+  const movie = req.body;
+
+/*   let randomIdNum = Math.floor(Math.random() * 10000000 + 1);
+
+  let nextId = `tt${randomIdNum}`;
+  console.log(nextId); */
+
+  const newMovie = {
+    ...movie,
+  };
+
+  console.log(newMovie)
+
+ /*  nextId++; */
+
+  movies.push(newMovie);
+  res.json(newMovie);
+});
+
 module.exports = router;
