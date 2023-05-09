@@ -1,36 +1,36 @@
 const apikeyData = [
   {
-    user1: 'user1',
+    user: 'user1',
     apikey: '001',
     id: 1,
   },
   {
-    user2: 'user2',
+    user: 'user2',
     apikey: '002',
     id: 2,
   },
   {
-    user3: 'user3',
+    user: 'user3',
     apikey: '003',
     id: 3,
   },
   {
-    user4: 'user4',
+    user: 'user4',
     apikey: '123',
     id: 4,
   },
   {
-    user104: 'user104',
+    user: 'user104',
     apikey: '456',
     id: 5,
   },
   {
-    user202: 'user202',
+    user: 'user202',
     apikey: '789',
     id: 6,
   },
   {
-    user555: 'user555',
+    user: 'user555',
     apikey: '100',
     id: 7,
   },

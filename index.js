@@ -8,8 +8,18 @@ const PORT = 5500;
 
 app.use(express.json());
 
-console.log(apikeysArray);
+app.get('/', (req, res) => {
+  res.send('Hello there are we up and running?!');
+});
 
+app.use('/movies', movies);
+app.use('/apikeys', apikeys);
+
+app.listen(PORT, () => {
+  console.log('server started on port 5500');
+});
+
+/* 
 // checking if api key is valid
 const authCheck = (req, res, next) => {
   const apikey = req.query.apikey;
@@ -39,14 +49,4 @@ app.use((req, res, next) => {
   authCheck(req, res, next);
   next();
 });
-
-app.get('/', (req, res) => {
-  res.send('Hello there are we up and running?!');
-});
-
-app.use('/movies', movies);
-app.use('/apikeys', apikeys);
-
-app.listen(PORT, () => {
-  console.log('server started on port 5500');
-});
+*/
