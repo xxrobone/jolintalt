@@ -44,6 +44,8 @@ router.delete('/:id', (req, res) => {
   res.json(`The movie ${title} with the id: ${movieID} successfully removed`);
 });
 
+
+// adding a movie
 router.post('/', (req, res) => {
   const movie = req.body;
 
@@ -96,8 +98,20 @@ router.post('/', (req, res) => {
   }
 
   // check released
+  if (!released) {
+    return res.status(400).json({
+      code: 'InvalidJsonInput',
+      message: 'Year is missing, please include a year',
+    });
+  }
 
   // check genre
+  if (genre === '' || genre === null || genre === undefined) {
+    return res.status(400).json({
+      code: 'InvalidJsonInput',
+      message: 'Title is missing a value, please include a movie name',
+    });
+  }
 
   const newMovie = {
     ...movie,
@@ -108,6 +122,7 @@ router.post('/', (req, res) => {
   res.json(newMovie);
 });
 
+// updating a movie
 router.put('/:id', (req, res) => {
   const id = req.params.id;
   const movie = req.body;

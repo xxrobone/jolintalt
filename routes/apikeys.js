@@ -4,14 +4,14 @@ const apikeysArr = require('../apikeyData');
 
 let apikeys = apikeysArr;
 
-console.log(apikeysArr);
+/* console.log(apikeysArr); */
 
 router.get('/', (req, res) => {
   res.json(apikeys);
 });
 
 router.get('/:id', (req, res) => {
-  // converting string to number Id is number in apikey data
+  // converting string to number Id is a number in apikey data
   const apikeyId = parseInt(req.params.id);
   const apikey = apikeys.find((key) => key.id === apikeyId);
 
@@ -55,12 +55,12 @@ router.post('/', (req, res) => {
     const key = apikey.apikey;
     const id = apikey.id;
    
-    let randomIdNum = Math.floor(Math.random() * 10000000 + 1);
+    let nextId = apikeysArr.length;
   
     let newId;
   
     if (!id) {
-      newId = `tt${randomIdNum}`;
+      newId = nextId++;
     } else {
       newId = id;
     }
