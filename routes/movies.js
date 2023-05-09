@@ -48,17 +48,29 @@ router.delete('/:id', (req, res) => {
 router.post('/', (req, res) => {
   const movie = req.body;
 
+  //check validation
+  // Title, Year, Released, Genre, imdbID
+  const title = movie.Title
+  const year = movie.Year 
+  const released = movie.Released 
+  const genre = movie.Genre
+  const id = movie.imdbID
+
+
   let randomIdNum = Math.floor(Math.random() * 10000000 + 1);
 
-  let nextId = `tt${randomIdNum}`;
-  console.log(nextId);
+  let newId;
+
+  if (!id) {
+    newId = `tt${randomIdNum}`;
+  } else {
+    newId = id
+  }
 
   const newMovie = {
     ...movie,
-    imdbID: nextId
+    imdbID: newId
   };
-
- /*  nextId++; */
 
   movies.push(newMovie);
   res.json(newMovie);
