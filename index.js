@@ -1,5 +1,6 @@
 const express = require('express');
 const movies = require('./routes/movies');
+const apikeys = require('./routes/apikeys');
 const apikeysArray = require('./apikeyData');
 const app = express();
 
@@ -44,6 +45,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/movies', movies);
+app.use('/apikeys', apikeys);
 
 app.listen(PORT, () => {
   console.log('server started on port 5500');
