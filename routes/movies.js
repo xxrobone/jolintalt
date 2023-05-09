@@ -48,16 +48,15 @@ router.delete('/:id', (req, res) => {
 router.post('/', (req, res) => {
   const movie = req.body;
 
-/*   let randomIdNum = Math.floor(Math.random() * 10000000 + 1);
+  let randomIdNum = Math.floor(Math.random() * 10000000 + 1);
 
   let nextId = `tt${randomIdNum}`;
-  console.log(nextId); */
+  console.log(nextId);
 
   const newMovie = {
     ...movie,
+    imdbID: nextId
   };
-
-  console.log(newMovie)
 
  /*  nextId++; */
 
