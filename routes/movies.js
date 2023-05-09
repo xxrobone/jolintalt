@@ -65,11 +65,7 @@ router.post('/', (req, res) => {
     newId = id;
   }
 
-  const newMovie = {
-    ...movie,
-    imdbID: newId,
-  };
-
+  // check if title exists
   if (title === '') {
     return res.status(400).json({
       code: 'InvalidJsonInput',
@@ -83,8 +79,51 @@ router.post('/', (req, res) => {
       message: 'Title is missing, please include a movie title',
     });
   }
+  // check that year is included and that it is numbers
+  if (!year) {
+    return res.status(400).json({
+      code: 'InvalidJsonInput',
+      message: 'Year is missing, please include a year',
+    });
+  }
+
+  if (isNaN(year)) {
+    return res.status(400).json({
+      code: 'InvalidJsonInput',
+      message:
+        'The Year has to be numbers, please include a year using number no letters',
+    });
+  }
+
+  // check released
+
+  // check genre
+
+  const newMovie = {
+    ...movie,
+    imdbID: newId,
+  };
+
   movies.push(newMovie);
   res.json(newMovie);
+});
+
+router.put('/:id', (req, res) => {
+  const id = req.params.id;
+  const movie = req.body;
+
+  const index = movies.findIndex((movie) => movie.imdbID === id);
+
+  if (index === -1) {
+    return res.status(404).json({
+      message: 'No movie found with the given id, please check the id',
+    });
+  }
+
+  const updatedMovie = { ...movies[index], ...movie };
+  movies[index] = updatedMovie;
+
+  res.json(updatedMovie);
 });
 
 module.exports = router;
