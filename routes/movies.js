@@ -44,18 +44,16 @@ router.delete('/:id', (req, res) => {
   res.json(`The movie ${title} with the id: ${movieID} successfully removed`);
 });
 
-
 router.post('/', (req, res) => {
   const movie = req.body;
 
   //check validation
   // Title, Year, Released, Genre, imdbID
-  const title = movie.Title
-  const year = movie.Year 
-  const released = movie.Released 
-  const genre = movie.Genre
-  const id = movie.imdbID
-
+  const title = movie.Title;
+  const year = movie.Year;
+  const released = movie.Released;
+  const genre = movie.Genre;
+  const id = movie.imdbID;
 
   let randomIdNum = Math.floor(Math.random() * 10000000 + 1);
 
@@ -64,14 +62,27 @@ router.post('/', (req, res) => {
   if (!id) {
     newId = `tt${randomIdNum}`;
   } else {
-    newId = id
+    newId = id;
   }
 
   const newMovie = {
     ...movie,
-    imdbID: newId
+    imdbID: newId,
   };
 
+  if (title === '') {
+    return res.status(400).json({
+      code: 'InvalidJsonInput',
+      message: 'Title is missing a value, please include a movie name',
+    });
+  }
+
+  if (title === null || title === undefined) {
+    return res.status(400).json({
+      code: 'InvalidJsonInput',
+      message: 'Title is missing, please include a movie title',
+    });
+  }
   movies.push(newMovie);
   res.json(newMovie);
 });
