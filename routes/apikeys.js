@@ -50,7 +50,6 @@ router.post('/', (req, res) => {
     const apikey = req.body;
   
     //check validation
-    // Title, Year, Released, Genre, imdbID
     const user = apikey.user;
     const key = apikey.apikey;
     const id = apikey.id;
