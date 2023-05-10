@@ -1,13 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const apikeysArr = require('../apikeyData');
+const {createApiKey, randomLetters, randomNumber, getStringFromDate} = require('../utils')
 
 let apikeys = apikeysArr;
 
 /* console.log(apikeysArr); */
 
+const key1 = createApiKey(getStringFromDate(), randomLetters(4), randomNumber());
+console.log(typeof(key1), key1)
+
+const apikeysArray = [123, 456, 789, 120, 102, 303, 404, 205];
+
 router.get('/', (req, res) => {
-  res.json(apikeys);
+  res.json(apikeysArray);
 });
 
 router.get('/:id', (req, res) => {
@@ -45,61 +51,84 @@ router.delete('/:id', (req, res) => {
   );
 });
 
+// or just from params
 
-router.post('/', (req, res) => {
-    const apikey = req.body;
-  
-    //check validation
-    const user = apikey.user;
-    const key = apikey.apikey;
-    const id = apikey.id;
-   
-    let nextId = apikeysArr.length;
-  
-    let newId;
-  
-    if (!id) {
-      newId = nextId++;
-    } else {
-      newId = id;
-    }
-  
-    const newApikey = {
-      ...apikey,
-      id: newId,
-    };
-  
-    if (user === '') {
-      return res.status(400).json({
-        code: 'InvalidJsonInput',
-        message: 'user is missing a value, please include a username',
-      });
-    }
+router.post('/:apikey', (req, res) => {
+  const apikey = parseInt(req.params.apikey);
 
-    if (user === null || user === undefined) {
-        return res.status(400).json({
-          code: 'InvalidJsonInput',
-          message: 'User is missing, please include a user',
-        });
-      }
 
-    if (key === '') {
-      return res.status(400).json({
-        code: 'InvalidJsonInput',
-        message: 'apikey is missing a value, please include a apikey',
-      });
-    }
+  if (apikey === '') {
+    return res.status(400).json({
+      code: 'InvalidJsonInput',
+      message: 'apikey is missing a value, please include a apikey',
+    });
+  }
 
-    if (key === null || key === undefined) {
-        return res.status(400).json({
-          code: 'InvalidJsonInput',
-          message: 'Apikey is missing, please include an apikey',
-        });
-      }
+  if (apikey === null || apikey === undefined) {
+    return res.status(400).json({
+      code: 'InvalidJsonInput',
+      message: 'Apikey is missing, please include an apikey',
+    });
+  }
+
+  apikeysArray.push(apikey);
+  res.json(apikey);
+});
+
+
+/* router.post('/', (req, res) => {
+  const apikey = req.body;
+
   
-    
-    apikeys.push(newApikey);
-    res.json(newApikey);
-  });
+  const user = apikey.user;
+  const key = apikey.apikey;
+  const id = apikey.id;
+
+  let nextId = apikeysArr.length;
+
+  let newId;
+
+  if (!id) {
+    newId = nextId++;
+  } else {
+    newId = id;
+  }
+
+  const newApikey = {
+    ...apikey,
+    id: newId,
+  };
+
+  if (user === '') {
+    return res.status(400).json({
+      code: 'InvalidJsonInput',
+      message: 'user is missing a value, please include a username',
+    });
+  }
+
+  if (user === null || user === undefined) {
+    return res.status(400).json({
+      code: 'InvalidJsonInput',
+      message: 'User is missing, please include a user',
+    });
+  }
+
+  if (key === '') {
+    return res.status(400).json({
+      code: 'InvalidJsonInput',
+      message: 'apikey is missing a value, please include a apikey',
+    });
+  }
+
+  if (key === null || key === undefined) {
+    return res.status(400).json({
+      code: 'InvalidJsonInput',
+      message: 'Apikey is missing, please include an apikey',
+    });
+  }
+
+  apikeys.push(newApikey);
+  res.json(newApikey);
+}); */
 
 module.exports = router;
