@@ -44,7 +44,6 @@ router.delete('/:id', (req, res) => {
   res.json(`The movie ${title} with the id: ${movieID} successfully removed`);
 });
 
-
 // adding a movie
 router.post('/', (req, res) => {
   const movie = req.body;
@@ -93,7 +92,7 @@ router.post('/', (req, res) => {
     return res.status(400).json({
       code: 'InvalidJsonInput',
       message:
-        'The Year has to be numbers, please include a year using number no letters',
+        'The Year has to be numbers, please include a year using number no letters allowed',
     });
   }
 
@@ -101,7 +100,7 @@ router.post('/', (req, res) => {
   if (!released) {
     return res.status(400).json({
       code: 'InvalidJsonInput',
-      message: 'Year is missing, please include a year',
+      message: 'Released data is missing, unable to add movie',
     });
   }
 
