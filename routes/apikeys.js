@@ -1,134 +1,93 @@
 const express = require('express');
 const router = express.Router();
-const apikeysArr = require('../apikeyData');
-const {createApiKey, randomLetters, randomNumber, getStringFromDate} = require('../utils')
+/* const {
+  createApiKey,
+  randomLetters,
+  randomNumber,
+  getStringFromDate,
+} = require('../utils'); */
 
-let apikeys = apikeysArr;
+/* const key1 = createApiKey(
+  getStringFromDate(),
+  randomLetters(4),
+  randomNumber()
+);
+console.log(typeof key1, key1); */
 
-/* console.log(apikeysArr); */
+let apikeysArr = [123, 456, 789, 120, 102, 303, 404, 205];
 
-const key1 = createApiKey(getStringFromDate(), randomLetters(4), randomNumber());
-console.log(typeof(key1), key1)
+// checking if api key is valid
+const checkApikeyValidation = (req, res, next) => {
+  const apikey = parseInt(req.query.apiKey);
+  console.log(apikey);
 
-const apikeysArray = [123, 456, 789, 120, 102, 303, 404, 205];
+  // Check if the given key is a valid key in our array of keys
+  const keyIsValid = apikeysArr.find((k) => k === apikey);
+  console.log(keyIsValid);
 
+  // checking the key
+  if (!keyIsValid) {
+    return res
+      .status(401)
+      .send({ message: 'unouthorized, no valid api key', code: 401 });
+  }
+  next();
+};
+
+// check all keys, was not a part of the assignment, added it anyways
 router.get('/', (req, res) => {
-  res.json(apikeysArray);
+  res.json(apikeysArr);
 });
 
-router.get('/:id', (req, res) => {
-  // converting string to number Id is a number in apikey data
-  const apikeyId = parseInt(req.params.id);
-  const apikey = apikeys.find((key) => key.id === apikeyId);
-
-  if (!apikeys) {
-    return res.status(404).json({
-      message: 'No apikeys found, error fetching data',
-    });
-  }
-
-  res.json(apikey);
-});
-
-router.delete('/:id', (req, res) => {
-  const apikeyId = parseInt(req.params.id);
-  const apikey = apikeys.find((a) => a.id === apikeyId);
-
-  const user = apikey.user;
-
-  if (!apikey) {
-    return res.status(404).json({
-      message: 'No apikey with this id, please check the id or try an other.',
-    });
-  }
-
-  const filteredData = apikeys.filter((apikey) => apikey.id !== apikeyId);
-
-  apikeys = filteredData;
-
-  res.json(
-    `The apikey for user ${user} with the id: ${apikeyId} successfully removed`
-  );
-});
-
-// or just from params
-
-router.post('/:apikey', (req, res) => {
-  const apikey = parseInt(req.params.apikey);
-
+// adding a key from query ?apiKey=<add new key>
+router.post('/', (req, res) => {
+  const apikey = parseInt(req.query.createNewKey);
 
   if (apikey === '') {
     return res.status(400).json({
       code: 'InvalidJsonInput',
-      message: 'apikey is missing a value, please include a apikey',
+      message:
+        'Please provide and api key in the query, ?apiKey=<new api key> to add a new one',
     });
   }
 
   if (apikey === null || apikey === undefined) {
     return res.status(400).json({
       code: 'InvalidJsonInput',
-      message: 'Apikey is missing, please include an apikey',
+      message: 'No api key provided, unable to create new key',
     });
   }
 
-  apikeysArray.push(apikey);
-  res.json(apikey);
+  // check that key don't already exist in keys array
+  const keyAlreadyInUse = apikeysArr.find((k) => k === apikey);
+  if (keyAlreadyInUse) {
+    return res
+      .status(400)
+      .send({
+        message: 'Bad Request, unable to add key, please provide an other key',
+      });
+  }
+  apikeysArr.push(apikey);
+  res.json({message: `Successfully added a new api key: ${apikey}`, code: 201});
 });
 
+router.delete('/', (req, res) => {
+  const apikey = apikeysArr.find((a) => a === parseInt(req.query.apiKey));
 
-/* router.post('/', (req, res) => {
-  const apikey = req.body;
-
-  
-  const user = apikey.user;
-  const key = apikey.apikey;
-  const id = apikey.id;
-
-  let nextId = apikeysArr.length;
-
-  let newId;
-
-  if (!id) {
-    newId = nextId++;
-  } else {
-    newId = id;
-  }
-
-  const newApikey = {
-    ...apikey,
-    id: newId,
-  };
-
-  if (user === '') {
-    return res.status(400).json({
-      code: 'InvalidJsonInput',
-      message: 'user is missing a value, please include a username',
+  if (!apikey) {
+    return res.status(404).json({
+      message: 'You need to provide an api key',
     });
   }
 
-  if (user === null || user === undefined) {
-    return res.status(400).json({
-      code: 'InvalidJsonInput',
-      message: 'User is missing, please include a user',
-    });
-  }
+  const filteredData = apikeysArr.filter((key) => key !== apikey);
 
-  if (key === '') {
-    return res.status(400).json({
-      code: 'InvalidJsonInput',
-      message: 'apikey is missing a value, please include a apikey',
-    });
-  }
+  apikeysArr = filteredData;
 
-  if (key === null || key === undefined) {
-    return res.status(400).json({
-      code: 'InvalidJsonInput',
-      message: 'Apikey is missing, please include an apikey',
-    });
-  }
+  res.json(`Api key: ${apikey} successfully deleted`);
+});
 
-  apikeys.push(newApikey);
-  res.json(newApikey);
-}); */
-
-module.exports = router;
+module.exports = {
+  apikeys: router,
+  keyCheck: checkApikeyValidation,
+};
