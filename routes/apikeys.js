@@ -41,35 +41,30 @@ router.get('/', (req, res) => {
 
 // POST // adding a key from query createNewKey=<add new key>
 router.post('/', (req, res) => {
-  const apikey = parseInt(req.query.createNewKey);
+  const apikey = parseInt(req.query.createNewApiKey);
 
-  if (apikey === '') {
+  if (!apikey) {
     return res.status(400).json({
-      code: 'InvalidJsonInput',
-      message:
-        'Please provide and api key in the query, ?apiKey=<new api key> to add a new one',
-    });
-  }
-
-  if (apikey === null || apikey === undefined) {
-    return res.status(400).json({
-      code: 'InvalidJsonInput',
-      message: 'No api key provided, unable to create new key',
+      code: 'Invalid input in query',
+      message: 'No api key provided or not valid input, unable to create new key, api key has to be numbers',
     });
   }
 
   // check that key don't already exist in keys array
   const keyAlreadyInUse = apikeysArr.find((k) => k === apikey);
   if (keyAlreadyInUse) {
-    return res
-      .status(400)
-      .send({
-        message: 'Bad Request, unable to add key, please provide an other api key',
-        error: 'Api key is already in use, please try a new api key'
-      });
+    return res.status(400).send({
+      message:
+        'Bad Request, unable to add key, please provide an other api key',
+      error: 'Api key is already in use, please try a new api key',
+    });
   }
+
   apikeysArr.push(apikey);
-  res.json({message: `Successfully added a new api key: ${apikey}`, code: 201});
+  res.json({
+    message: `Successfully added a new api key: ${apikey}`,
+    code: 201,
+  });
 });
 
 // DELETE // delete an apikey using query
@@ -79,7 +74,7 @@ router.delete('/', (req, res) => {
   if (!apikey) {
     return res.status(404).json({
       message: 'You need to provide a valid api key',
-      error: 'Invalid key in query'
+      error: 'Invalid key in query',
     });
   }
 

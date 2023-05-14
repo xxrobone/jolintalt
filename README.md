@@ -225,9 +225,11 @@ These keys and values of the object has to be included
 
 ---
 ### Method: POST 
-To add an apikey using query (createApiKey)
+To add an apikey using query (createNewApiKey)
 
-- http://localhost:5500/apikeys?apiKey=789&createNewKey=555
+### To add key you can copy paste this to test it
+
+- http://localhost:5500/apikeys/?apiKey=789&createNewApiKey=555
 
 ### Example of successfully added api key
 
@@ -246,6 +248,21 @@ Using an already existing key
 {
     "message": "Bad Request, unable to add key, please provide an other api key",
     "error": "Api key is already in use, please try a new api key"
+}
+
+```
+
+---
+
+### Example of no key or wrong input
+Using an already existing key
+
+```
+{
+   {
+    "code": "Invalid input in query",
+    "message": "No api key provided or not valid input, unable to create new key, api key has to be numbers"
+}
 }
 
 ```
