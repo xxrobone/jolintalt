@@ -74,17 +74,32 @@ router.post('/', (req, res) => {
     });
   }
 
-  if (title === null || title === undefined) {
+  if (!title) {
     return res.status(400).json({
       code: 'InvalidJsonInput',
       message: 'Title is missing, please include a movie title',
     });
   }
+
   // check that year is included and that it is numbers
   if (!year) {
     return res.status(400).json({
       code: 'InvalidJsonInput',
-      message: 'Year is missing, please include a year',
+      message: 'Year is missing, please include a Year',
+    });
+  }
+
+  if (!genre) {
+    return res.status(400).json({
+      code: 'InvalidJsonInput',
+      message: 'Genre is missing, please include a Genre',
+    });
+  }
+
+  if (!released) {
+    return res.status(400).json({
+      code: 'InvalidJsonInput',
+      message: 'Released is missing, please include a Released',
     });
   }
 
