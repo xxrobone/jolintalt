@@ -270,8 +270,8 @@ if the apikey is not in the array of keys
 
 ```
 {
-    "message": "unouthorized, no valid api key",
-    "code": 401
+    "message": "You need to provide a valid api key",
+    "error": "Invalid key in query"
 }
 
 ```
