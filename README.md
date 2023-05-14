@@ -32,7 +32,7 @@ List of keys:<br>
 
 ```
 
-If trying out in a browser you can copy paste this - http://localhost:5500/movies/?apiKey=456 <br>
+To try this out in a browser you can copy paste this - http://localhost:5500/movies/?apiKey=456 <br>
 Will show all movies 
 
 **The Movie ##ENDPOINTS are as follows:** <br>
