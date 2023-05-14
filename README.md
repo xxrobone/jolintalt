@@ -22,7 +22,7 @@ List of keys:<br>
 123, 456, 789, 120, 102, 303, 404, 205 <br>
 (I know very simple)
 
-###If api key would be wrong you will get an error like so:
+### If api key would be wrong you will get an error like so:
  
 ```
 {
