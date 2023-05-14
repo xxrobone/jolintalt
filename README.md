@@ -271,7 +271,7 @@ if the apikey is not in the array of keys
 ```
 {
     "message": "You need to provide a valid api key",
-    "error": "Invalid key in query"
+    "error": "Invalid or no api key in query"
 }
 
 ```
