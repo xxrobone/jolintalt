@@ -1,4 +1,9 @@
 ### Webbservers & databases
+
+### Till lärare
+Angående obligatoriska fält, jag har ej lagt till dom i PUT requesten för tänk om man bara vill ändra titel tex. 
+Har dessa med i POST antar att det är just den dom skall finnas i. 
+
 # Node express crud assignment
 # Bond Movie RestAPI
 

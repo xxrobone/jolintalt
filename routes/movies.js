@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
   res.json(movies);
 });
 
+// GET // get a movie by id
 router.get('/:id', (req, res) => {
   const movieID = req.params.id;
 
@@ -24,6 +25,7 @@ router.get('/:id', (req, res) => {
   res.json(movie);
 });
 
+// DELETE // delete a movie by id
 router.delete('/:id', (req, res) => {
   const movieID = req.params.id;
   const movie = movies.find((m) => m.imdbID === movieID);
@@ -44,7 +46,7 @@ router.delete('/:id', (req, res) => {
   res.json(`The movie ${title} with the id: ${movieID} successfully removed`);
 });
 
-// adding a movie
+// POST // adding a new movie - Title, Year, Released, Genre must be included in the req.body
 router.post('/', (req, res) => {
   const movie = req.body;
 
@@ -60,6 +62,7 @@ router.post('/', (req, res) => {
 
   let newId;
 
+  // checking if id is included if not creating an id
   if (!id) {
     newId = `tt${randomIdNum}`;
   } else {
@@ -89,20 +92,7 @@ router.post('/', (req, res) => {
     });
   }
 
-  if (!genre) {
-    return res.status(400).json({
-      code: 'InvalidJsonInput',
-      message: 'Genre is missing, please include a Genre',
-    });
-  }
-
-  if (!released) {
-    return res.status(400).json({
-      code: 'InvalidJsonInput',
-      message: 'Released is missing, please include a Released',
-    });
-  }
-
+  // validate year is a number
   if (isNaN(year)) {
     return res.status(400).json({
       code: 'InvalidJsonInput',
@@ -111,22 +101,23 @@ router.post('/', (req, res) => {
     });
   }
 
-  // check released
+  // validate genre is included
+  if (!genre) {
+    return res.status(400).json({
+      code: 'InvalidJsonInput',
+      message: 'Genre is missing, please include a Genre',
+    });
+  }
+
+  // validate released is included
   if (!released) {
     return res.status(400).json({
       code: 'InvalidJsonInput',
-      message: 'Released data is missing, unable to add movie',
+      message: 'Released is missing, please include a Released',
     });
   }
 
-  // check genre
-  if (genre === '' || genre === null || genre === undefined) {
-    return res.status(400).json({
-      code: 'InvalidJsonInput',
-      message: 'Title is missing a value, please include a movie name',
-    });
-  }
-
+  // adding new movie req.body is movie object
   const newMovie = {
     ...movie,
     imdbID: newId,
@@ -136,7 +127,7 @@ router.post('/', (req, res) => {
   res.json(newMovie);
 });
 
-// updating a movie
+// PUT // updating a movie
 router.put('/:id', (req, res) => {
   const id = req.params.id;
   const movie = req.body;
