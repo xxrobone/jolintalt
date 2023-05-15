@@ -162,7 +162,7 @@ These keys and values of the object has to be included
 ```
 
 ### Example of missing key/values:
-- in this example "Yead": "abc" is set to abc
+- in this example "Year": "abc" is set to abc
 
 ```
 
