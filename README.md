@@ -187,6 +187,8 @@ These keys and values of the object has to be included
 ---
 
 ### Method: PUT /movies/:id
+These keys and values of the object has to be included
+- Title, Year (has to be number), Released, Genre
 
 -  http://localhost:5500/movies/tt6110504?apiKey=123
 - Update a movie 
