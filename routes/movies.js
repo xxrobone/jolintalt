@@ -132,6 +132,61 @@ router.put('/:id', (req, res) => {
   const id = req.params.id;
   const movie = req.body;
 
+  // Title, Year, Released, Genre, imdbID
+  const title = movie.Title;
+  const year = movie.Year;
+  const released = movie.Released;
+  const genre = movie.Genre;
+
+  // could have seprated and made these their own validation functions
+
+  // check if title exists
+  if (title === '') {
+    return res.status(400).json({
+      code: 'InvalidJsonInput',
+      message: 'Title is missing a value, please include a movie name',
+    });
+  }
+
+  if (title === null || title === undefined) {
+    return res.status(400).json({
+      code: 'InvalidJsonInput',
+      message: 'Title is missing, please include a movie title',
+    });
+  }
+  // check that year is included and that it is numbers
+  if (!year) {
+    return res.status(400).json({
+      code: 'InvalidJsonInput',
+      message: 'Year is missing, please include a year',
+    });
+  }
+
+  if (isNaN(year)) {
+    return res.status(400).json({
+      code: 'InvalidJsonInput',
+      message:
+        'The Year has to be numbers, please include a year using number no letters',
+    });
+  }
+
+  // check released
+  if (!released) {
+    return res.status(400).json({
+      code: 'InvalidJsonInput',
+      message: 'Released is missing, please include a released',
+    });
+  }
+
+  // check genre
+  if (genre === '' || genre === null || genre === undefined) {
+    return res.status(400).json({
+      code: 'InvalidJsonInput',
+      message:
+        'Genre is missing a value, please include a movie genre or genres',
+    });
+  }
+
   const index = movies.findIndex((movie) => movie.imdbID === id);
 
   if (index === -1) {
