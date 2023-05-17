@@ -1,18 +1,5 @@
 const express = require('express');
 const router = express.Router();
-/* const {
-  createApiKey,
-  randomLetters,
-  randomNumber,
-  getStringFromDate,
-} = require('../utils'); */
-
-/* const key1 = createApiKey(
-  getStringFromDate(),
-  randomLetters(4),
-  randomNumber()
-);
-console.log(typeof key1, key1); */
 
 let apikeysArr = [123, 456, 789, 120, 102, 303, 404, 205];
 
@@ -46,7 +33,8 @@ router.post('/', (req, res) => {
   if (!apikey) {
     return res.status(400).json({
       code: 'Invalid input in query',
-      message: 'No api key provided or not valid input, unable to create new key, api key has to be numbers',
+      message:
+        'No api key provided or not valid input, unable to create new key, api key has to be numbers',
     });
   }
 

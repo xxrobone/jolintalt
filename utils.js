@@ -1,4 +1,3 @@
-
 const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 const randomNumber = () => Math.floor(Math.random() * 10000 + 1);
 
@@ -17,8 +16,8 @@ const randomLetters = (length) => {
 const getStringFromDate = () => {
   const date = Date.now();
   /* console.log(typeof(date), date) */
-  const str = date.toString().split('').reverse().slice(5, 8).join('')
- /*  console.log(typeof(str), str) */
+  const str = date.toString().split('').reverse().slice(5, 8).join('');
+  /*  console.log(typeof(str), str) */
   return str;
 };
 
@@ -28,8 +27,8 @@ const createApiKey = (a, b, c) => {
 };
 
 module.exports = {
-    createApiKey,
-    getStringFromDate,
-    randomNumber,
-    randomLetters
-}
+  createApiKey,
+  getStringFromDate,
+  randomNumber,
+  randomLetters,
+};
