@@ -7,7 +7,7 @@ const { apikeys, keyCheck } = require('./routes/apikeys');
 const PORT = 5500;
 
 const corsOptions = {
-  origin: 'http://localhost:5500',
+  origin: ['http://localhost:5500', 'https://specialdelivery.vercel.app/'],
 };
 
 app.use(cors(corsOptions));
