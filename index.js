@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  res.send('Hello there are we are up and running?!');
+  res.send('Hello there we are up and running!');
 });
 
 app.use('/inclusionMetrics', inclusionMetrics);
