@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const movies = require('./routes/movies');
+const inclusionMetrics = require('./routes/inclusionMetrics');
 const { apikeys, keyCheck } = require('./routes/apikeys');
 
 const PORT = 5500;
@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
   res.send('Hello there are we are up and running?!');
 });
 
-app.use('/movies', movies);
+app.use('/inclusionMetrics', inclusionMetrics);
 app.use('/apikeys', apikeys);
 
 app.listen(PORT, () => {

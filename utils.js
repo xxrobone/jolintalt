@@ -1,3 +1,5 @@
+// if doing an easy id or create and easy apiKey
+
 const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 const randomNumber = () => Math.floor(Math.random() * 10000 + 1);
 

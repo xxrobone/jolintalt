@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-let apikeysArr = [123, 456, 789, 120, 102, 303, 404, 205];
+let apikeysArr = ['cme123', 'cme456'];
 
 // checking if api key is valid
 const checkApikeyValidation = (req, res, next) => {
-  const apikey = parseInt(req.query.apiKey);
+  const apikey = req.query.apiKey;
   console.log(apikey);
 
   // Check if the given key is a valid key in our array of keys
@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
 
 // POST // adding a key from query createNewKey=<add new key>
 router.post('/', (req, res) => {
-  const apikey = parseInt(req.query.createNewApiKey);
+  const apikey = req.query.createNewApiKey;
 
   if (!apikey) {
     return res.status(400).json({
@@ -57,7 +57,7 @@ router.post('/', (req, res) => {
 
 // DELETE // delete an apikey using query
 router.delete('/', (req, res) => {
-  const apikey = apikeysArr.find((a) => a === parseInt(req.query.deleteApiKey));
+  const apikey = apikeysArr.find((a) => a === req.query.deleteApiKey);
 
   if (!apikey) {
     return res.status(404).json({

@@ -1,30 +1,11 @@
-### Webbservers & databases
+# MockData api
 
-### Till lärare
-Angående obligatoriska fält, jag har ej lagt till dom i PUT requesten för tänk om man bara vill ändra titel tex. 
-Har dessa med i POST antar att det är just den dom skall finnas i. 
 
-# Node express crud assignment
-# Bond Movie RestAPI
-
-## Project description
-This application requires Node installed 
-You can download it here [node] <br>
-This is a simple crud operations project to handle Rest Api using a Bond Movie mockData (Dummy data) 
-
-## Getting started
-To run the project:
-1. Clone this repo, fork it, or download the zip [bond_movie_crud]
-2. Open the project using vs code or your favorite editor
-3. Open a terminal and write "npm i" or "npm install" to install the dependencies
-4. Type command "Npm run server" (opens a port on 5500)
-5. Open a browser to check the API or use [postman] to test the endpoints 
+# Node express get data
 
 ## You need an api key to access endpoints
-example: http://localhost:5500/movies?apiKey=123 <br>
-Write: ?apiKey=<apikey> <br>
-List of keys:<br>
-123, 456, 789, 120, 102, 303, 404, 205 <br>
+example: http://localhost:5500/inclusionMetrics?apiKey=<get a key> <br>
+you can get the key from contacting me
 (I know very simple)
 
 ### If api key would be wrong you will get an error like so:
