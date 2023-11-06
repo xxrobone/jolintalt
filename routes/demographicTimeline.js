@@ -15,19 +15,5 @@ router.get('/', (req, res) => {
   res.json(demographicTimeline);
 });
 
-// GET // get a data by id
-router.get('/:gender', (req, res) => {
-    const gender = req.params.gender;
-  
-    const dataByGender = demographicTimeline.find((m) => m.demographic_category === gender);
-  
-    if (!dataByGender) {
-      return res.status(404).json({
-        message: 'No data with this id was found, please try an other!',
-      });
-    }
-  
-    res.json(dataByGender);
-  });
 
 module.exports = router;
