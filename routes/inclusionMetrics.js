@@ -23,7 +23,7 @@ router.get('/:team', (req, res) => {
 
   if (!team) {
     return res.status(404).json({
-      message: 'No movie with this id was found, please try an other!',
+      message: 'No team with this team name was found, please try an other!',
     });
   }
 
