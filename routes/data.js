@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const mockData = require('../demographicInclusion.json');
+const mockData = require('../db.json');
 
-let demographicInclusion = mockData;
+let data = mockData;
 
 //
 router.get('/', (req, res) => {
@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
       message: 'No data found 404',
     });
   }
-  res.json(demographicInclusion);
+  res.json(data);
 });
 
 module.exports = router;

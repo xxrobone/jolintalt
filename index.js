@@ -1,9 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const inclusionMetrics = require('./routes/inclusionMetrics');
-const demographicInclusionMetrics = require('./routes/demographicInclusion');
-const demographicTimelineMetrics = require('./routes/demographicTimeline');
+const data = require('./routes/data');
 const { apikeys, keyCheck } = require('./routes/apikeys');
 
 const PORT = 5500;
@@ -29,9 +27,7 @@ app.get('/', (req, res) => {
   res.send('Hello there we are up and running!');
 });
 
-app.use('/inclusionMetrics', inclusionMetrics);
-app.use('/demographicInclusionMetrics', demographicInclusionMetrics);
-app.use('/demographicTimelineMetrics', demographicTimelineMetrics);
+app.use('/data', data);
 app.use('/apikeys', apikeys);
 
 app.listen(PORT, () => {
