@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const data = require('./routes/data');
-const { apikeys, keyCheck } = require('./routes/apikeys');
+/* const { apikeys, keyCheck } = require('./routes/apikeys'); */
 
 const PORT = 5500;
 
@@ -19,16 +19,16 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
   keyCheck(req, res, next);
-});
+}); */
 
 app.get('/', (req, res) => {
   res.send('Hello there we are up and running!');
 });
 
 app.use('/data', data);
-app.use('/apikeys', apikeys);
+/* app.use('/apikeys', apikeys); */
 
 app.listen(PORT, () => {
   console.log('server started on port 5500');

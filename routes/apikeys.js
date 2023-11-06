@@ -21,13 +21,11 @@ const checkApikeyValidation = (req, res, next) => {
   next();
 };
 
-// check all keys, was not a part of the assignment, added it anyways
 router.get('/', (req, res) => {
   res.json(apikeysArr);
 });
 
-// POST // adding a key from query createNewKey=<add new key>
-router.post('/', (req, res) => {
+/* router.post('/', (req, res) => {
   const apikey = req.query.createNewApiKey;
 
   if (!apikey) {
@@ -37,9 +35,8 @@ router.post('/', (req, res) => {
         'No api key provided or not valid input, unable to create new key, api key has to be numbers',
     });
   }
-
-  // check that key don't already exist in keys array
-  const keyAlreadyInUse = apikeysArr.find((k) => k === apikey);
+ */
+/* const keyAlreadyInUse = apikeysArr.find((k) => k === apikey);
   if (keyAlreadyInUse) {
     return res.status(400).send({
       message:
@@ -53,10 +50,9 @@ router.post('/', (req, res) => {
     message: `Successfully added a new api key: ${apikey}`,
     code: 201,
   });
-});
+}); */
 
-// DELETE // delete an apikey using query
-router.delete('/', (req, res) => {
+/* router.delete('/', (req, res) => {
   const apikey = apikeysArr.find((a) => a === req.query.deleteApiKey);
 
   if (!apikey) {
@@ -71,7 +67,7 @@ router.delete('/', (req, res) => {
   apikeysArr = filteredData;
 
   res.json(`Api key: ${apikey} successfully deleted`);
-});
+}); */
 
 module.exports = {
   apikeys: router,
